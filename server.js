@@ -67,10 +67,12 @@ app.delete('/products/:id', (req, res) => {
     const products = readProducts();
     const index = products.findIndex(p => p.Id === req.params.id);
     if (index !== -1) {
+        console.log('Product Deleted success (server)')
         products.splice(index, 1);
         saveProducts(products);
-        res.status(204).send('sucssed');
+        res.status(200).send();
     } else {
+        console.log('Failed product Deleted (server)')
         res.status(404).send('Product not found');
     }
 });
