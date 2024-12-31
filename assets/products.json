@@ -240,18 +240,6 @@
     "company": "ModernStorage"
   },
   {
-    "Id": "65",
-    "image": "assets/product-images/tbi/ASNAT.png",
-    "name": "Modular Sofa",
-    "categories": [
-      "ספות"
-    ],
-    "price": 2200,
-    "describe": "Sofa with modular sections for customizable seating.",
-    "colors": "Beige, Dark Brown",
-    "company": "ModularComfort"
-  },
-  {
     "Id": "66",
     "image": "assets/product-images/tbi/BARKAT.png",
     "name": "Sofa with Storage",

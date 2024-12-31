@@ -51,8 +51,14 @@ app.get('/is-admin', authenticateToken, (req, res) => {
 
 app.get('/products', (req, res) => {
     const products = readProducts();
-    res.json(products);
+    const baseUrl = `http://localhost:${port}`;
+    const updatedProducts = products.map(product => ({
+        ...product,
+        image: `${baseUrl}/${product.image}`
+    }));
+    res.json(updatedProducts);
 });
+
 
 app.get('/products/:id', (req, res) => {
     console.log(req);
@@ -65,31 +71,82 @@ app.get('/products/:id', (req, res) => {
     }
 });
 
-app.post('/products', authenticateToken, (req, res) => {
+app.post('/products/upload-image', (req, res) => {
+    const multer = require('multer');
+    console.log("req.body: "+req.body);
+    
+    const folderPath = `assets/product-images/${req.body.folder}`;
+    // const folderPath = `assets`;
+    if (!fs.existsSync(folderPath)) {
+        fs.mkdirSync(folderPath, { recursive: true });
+    }
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, folderPath);
+        },
+        filename: (req, file, cb) => {
+            cb(null, file.originalname);
+        }
+    });
+    const upload = multer({ storage }).single('image');
+    upload(req, res, (err) => {
+        if (err) {
+            return res.status(500).send('Error uploading file.');
+        }
+        const imagePath = `${folderPath}/${req.file.filename}`;
+        res.json({ imagePath });
+    });
+});
+
+app.post('/products/delete-image', (req, res) => {
+    let imagePath = req.body.imagePath.replace(`http://localhost:${port}/`, '');
+    if (!imagePath) {
+        return res.status(400).send('No image path provided');
+    }
+    fs.access(imagePath, fs.constants.F_OK, (err) => {
+        if (err) {
+            return res.status(404).send('Image not found');
+        }
+        fs.unlink(imagePath, (err) => {
+            if (err) {
+                return res.status(500).send('Error deleting image');
+            }
+            res.send('Image deleted successfully');
+        });
+    });
+});
+
+app.post('/products', (req, res) => {
     const products = readProducts();
     console.log(req.body)
     const newProduct = req.body;
+    if (newProduct.image.startsWith(`http://localhost:${port}/`)) {
+        newProduct.image = newProduct.image.replace(`http://localhost:${port}/`, '');
+    }
     newProduct.Id = uuidv4();
     products.push(newProduct);
     saveProducts(products);
     res.status(201).json(newProduct);
 });
 
-app.put('/products/:id', authenticateToken, (req, res) => {
+app.put('/products/:id', (req, res) => {
     const products = readProducts();
     console.log(typeof (products[0].Id))
     console.log(typeof (req.params.id))
     const index = products.findIndex(p => p.Id === req.params.id);
     if (index !== -1) {
         const updatedProduct = { ...products[index], ...req.body };
+        if (updatedProduct.image.startsWith(`http://localhost:${port}/`)) {
+            updatedProduct.image = updatedProduct.image.replace(`http://localhost:${port}/`, '');
+        }
         products[index] = updatedProduct;
-        products[index].Id = req.params.id;
         saveProducts(products);
         res.json(updatedProduct);
     } else {
         res.status(404).send('Product not found');
     }
 });
+
 
 app.delete('/products/:id', authenticateToken, (req, res) => {
     const products = readProducts();
