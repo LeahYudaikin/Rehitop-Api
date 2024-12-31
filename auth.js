@@ -5,7 +5,6 @@ require('dotenv').config();
 const adminUsername = process.env.ADMIN_USERNAME || 'admin'; // שם המשתמש של המנהל
 const adminPassword = process.env.ADMIN_PASSWORD || 'admin123'; // הסיסמה של המנהל (לא בטקסט רגיל במציאות)
 const hashedPassword = process.env.HASHED_PASSWORD;
-console.log(adminUsername, adminPassword, hashedPassword);
 
 const secretKey = process.env.SECRET_KEY || 'yourSecretKey'; // מפתח הסודי ליצירת הטוקן
 
@@ -19,7 +18,6 @@ const authenticateUser = (username, password) => {
 
 // פונקציה ליצירת טוקן JWT
 const generateAuthToken = (username) => {
-  console.log('SecretKey in generateAuthToken', secretKey)
   const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
   if (!token) {
     return res.status(403).send('נדרש טוקן');
@@ -31,11 +29,9 @@ const generateAuthToken = (username) => {
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  
   if (!token) {
     return res.status(403).send('נדרש טוקן');
   }
-  console.log('SecretKey in authenticateToken', secretKey)
   jwt.verify(token, secretKey, (err, user) => {
     if (err) {
       return res.status(403).send('הטוקן לא תקף');

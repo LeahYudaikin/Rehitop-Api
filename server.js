@@ -31,7 +31,6 @@ const saveProducts = (products) => {
 // }
 
 app.post('/login', (req, res) => {
-    console.log('Login request body:', req.body);
     const { username, password } = req.body;
 
     if (authenticateUser(username, password)) {
@@ -43,7 +42,6 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/is-admin', authenticateToken, (req, res) => {
-    console.log('req.user.username === adminUsername', req.user.username)
     if (req.user.username === 'admin') {
         res.send(req.user.username + ' Welcome to the admin area!');
     } else {
@@ -67,7 +65,7 @@ app.get('/products/:id', (req, res) => {
     }
 });
 
-app.post('/products', (req, res) => {
+app.post('/products', authenticateToken, (req, res) => {
     const products = readProducts();
     console.log(req.body)
     const newProduct = req.body;
@@ -77,7 +75,7 @@ app.post('/products', (req, res) => {
     res.status(201).json(newProduct);
 });
 
-app.put('/products/:id', (req, res) => {
+app.put('/products/:id', authenticateToken, (req, res) => {
     const products = readProducts();
     console.log(typeof (products[0].Id))
     console.log(typeof (req.params.id))
@@ -93,7 +91,7 @@ app.put('/products/:id', (req, res) => {
     }
 });
 
-app.delete('/products/:id', (req, res) => {
+app.delete('/products/:id', authenticateToken, (req, res) => {
     const products = readProducts();
     const index = products.findIndex(p => p.Id === req.params.id);
     if (index !== -1) {
