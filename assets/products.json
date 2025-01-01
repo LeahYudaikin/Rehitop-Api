@@ -1,53 +1,5 @@
 [
   {
-    "Id": "41",
-    "image": "assets/product-images/tbi/ASNAT.png",
-    "name": "Corner Sofa",
-    "categories": [
-      "ספות"
-    ],
-    "price": 2300,
-    "describe": "Corner sofa for spacious living rooms.",
-    "colors": "Gray, White",
-    "company": "CornerComfort"
-  },
-  {
-    "Id": "42",
-    "image": "assets/product-images/tbi/BARKAT.png",
-    "name": "Platform Bed",
-    "categories": [
-      "מיטות"
-    ],
-    "price": 1400,
-    "describe": "Platform bed with modern, minimalist design.",
-    "colors": "Wooden, White",
-    "company": "MinimalSleep"
-  },
-  {
-    "Id": "43",
-    "image": "assets/product-images/tbi/DAVID.png",
-    "name": "High Back Chair",
-    "categories": [
-      "כיסאות"
-    ],
-    "price": 280,
-    "describe": "High back chair ideal for back support.",
-    "colors": "Black, Brown",
-    "company": "SupportSeats"
-  },
-  {
-    "Id": "44",
-    "image": "assets/product-images/tbi/LESHEM.png",
-    "name": "Wooden Closet",
-    "categories": [
-      "ארונות חדר ילדים"
-    ],
-    "price": 950,
-    "describe": "Durable wooden closet with ample space.",
-    "colors": "Light Wood",
-    "company": "StorageCraft"
-  },
-  {
     "Id": "45",
     "image": "assets/product-images/chair1.jpg",
     "name": "Rocking Chair",
@@ -96,18 +48,6 @@
     "company": "SpaceSaver"
   },
   {
-    "Id": "49",
-    "image": "assets/product-images/tbi/DAVID.png",
-    "name": "Massage Chair",
-    "categories": [
-      "כיסאות"
-    ],
-    "price": 450,
-    "describe": "Chair with built-in massage functionality.",
-    "colors": "Black, Beige",
-    "company": "RelaxPro"
-  },
-  {
     "Id": "50",
     "image": "assets/product-images/tbi/LESHEM.png",
     "name": "Kids Closet",
@@ -130,30 +70,6 @@
     "describe": "Mesh office chair for breathability and comfort.",
     "colors": "Black, Gray",
     "company": "WorkZone"
-  },
-  {
-    "Id": "52",
-    "image": "assets/product-images/closet1.png",
-    "name": "Tall Closet",
-    "categories": [
-      "ארונות חדר ילדים"
-    ],
-    "price": 950,
-    "describe": "Tall closet with adjustable shelves.",
-    "colors": "Dark Wood",
-    "company": "TallStorage"
-  },
-  {
-    "Id": "53",
-    "image": "assets/product-images/tbi/ASNAT.png",
-    "name": "Luxury Sofa",
-    "categories": [
-      "ספות"
-    ],
-    "price": 2800,
-    "describe": "Premium luxury sofa with elegant design.",
-    "colors": "White, Black",
-    "company": "LuxFurnish"
   },
   {
     "Id": "54",
@@ -286,18 +202,6 @@
     "describe": "Contemporary closet with clean design.",
     "colors": "Gray, Wood",
     "company": "ModernStorage"
-  },
-  {
-    "Id": "65",
-    "image": "assets/product-images/tbi/ASNAT.png",
-    "name": "Modular Sofa",
-    "categories": [
-      "ספות"
-    ],
-    "price": 2200,
-    "describe": "Sofa with modular sections for customizable seating.",
-    "colors": "Beige, Dark Brown",
-    "company": "ModularComfort"
   },
   {
     "Id": "66",
@@ -720,16 +624,15 @@
     "company": "ModularStorage"
   },
   {
-    "name": "Corner Sofa",
-    "image": "assets/product-images/undefined/6.jpg",
+    "name": "sara ",
+    "image": "assets/product-images/undefined/IMG_9232.JPG",
     "categories": [
-      "ספות",
-      ""
+      "כיסאות"
     ],
-    "price": 0,
-    "describe": "ך9לטןוחטיאנכהג",
+    "price": 8748,
+    "describe": "",
     "colors": "",
     "company": "",
-    "Id": "15dd16a1-7bab-4d52-a2b2-49c42c20e08e"
+    "Id": "efc34970-427e-4484-bb9a-9c7a49501cd7"
   }
 ]

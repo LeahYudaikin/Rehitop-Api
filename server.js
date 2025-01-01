@@ -4,6 +4,9 @@ const fs = require('fs');
 const { console } = require('inspector');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
+const bodyParser = require('body-parser');
+const { authenticateUser, generateAuthToken, authenticateToken } = require('./auth');
+require('dotenv').config();
 
 const app = express();
 const port = 3001;
@@ -11,6 +14,8 @@ const port = 3001;
 const productsFile = path.join(__dirname, 'assets/products.json');
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 const readProducts = () => {
@@ -21,6 +26,30 @@ const readProducts = () => {
 const saveProducts = (products) => {
     fs.writeFileSync(productsFile, JSON.stringify(products, null, 2));
 };
+
+// {
+//     "username": "admin",
+//     "password": "admin123"
+// }
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    if (authenticateUser(username, password)) {
+        const token = generateAuthToken(username);
+        res.json({ token });
+    } else {
+        res.status(401).send('Invalid username or password');
+    }
+});
+
+app.get('/is-admin', authenticateToken, (req, res) => {
+    if (req.user.username === 'admin') {
+        res.send(req.user.username + ' Welcome to the admin area!');
+    } else {
+        res.status(403).send('Access denied. Admins only.');
+    }
+});
 
 app.get('/products', (req, res) => {
     const products = readProducts();
