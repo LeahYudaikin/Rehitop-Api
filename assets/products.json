@@ -1,29 +1,5 @@
 [
   {
-    "Id": "43",
-    "image": "assets/product-images/tbi/DAVID.png",
-    "name": "High Back Chair",
-    "categories": [
-      "כיסאות"
-    ],
-    "price": 280,
-    "describe": "High back chair ideal for back support.",
-    "colors": "Black, Brown",
-    "company": "SupportSeats"
-  },
-  {
-    "Id": "44",
-    "image": "assets/product-images/tbi/LESHEM.png",
-    "name": "Wooden Closet",
-    "categories": [
-      "ארונות חדר ילדים"
-    ],
-    "price": 950,
-    "describe": "Durable wooden closet with ample space.",
-    "colors": "Light Wood",
-    "company": "StorageCraft"
-  },
-  {
     "Id": "45",
     "image": "assets/product-images/chair1.jpg",
     "name": "Rocking Chair",
@@ -70,18 +46,6 @@
     "describe": "Space-saving foldable bed for easy storage.",
     "colors": "White, Black",
     "company": "SpaceSaver"
-  },
-  {
-    "Id": "49",
-    "image": "assets/product-images/tbi/DAVID.png",
-    "name": "Massage Chair",
-    "categories": [
-      "כיסאות"
-    ],
-    "price": 450,
-    "describe": "Chair with built-in massage functionality.",
-    "colors": "Black, Beige",
-    "company": "RelaxPro"
   },
   {
     "Id": "50",
@@ -658,5 +622,17 @@
     "describe": "Modular wardrobe with adjustable compartments.",
     "colors": "Natural Wood",
     "company": "ModularStorage"
+  },
+  {
+    "name": "sara ",
+    "image": "assets/product-images/undefined/IMG_9232.JPG",
+    "categories": [
+      "כיסאות"
+    ],
+    "price": 8748,
+    "describe": "",
+    "colors": "",
+    "company": "",
+    "Id": "efc34970-427e-4484-bb9a-9c7a49501cd7"
   }
 ]

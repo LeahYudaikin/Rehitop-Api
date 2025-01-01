@@ -1,6 +1,7 @@
 const cors = require('cors');
 const express = require('express');
 const fs = require('fs');
+const { console } = require('inspector');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const bodyParser = require('body-parser');
@@ -11,10 +12,11 @@ const app = express();
 const port = 3001;
 
 const productsFile = path.join(__dirname, 'assets/products.json');
-
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 const readProducts = () => {
     const data = fs.readFileSync(productsFile);
@@ -147,17 +149,14 @@ app.put('/products/:id', (req, res) => {
     }
 });
 
-
-app.delete('/products/:id', authenticateToken, (req, res) => {
+app.delete('/products/:id', (req, res) => {
     const products = readProducts();
     const index = products.findIndex(p => p.Id === req.params.id);
     if (index !== -1) {
-        console.log('Product Deleted success (server)')
         products.splice(index, 1);
         saveProducts(products);
-        res.status(200).send();
+        res.status(204).send('sucssed');
     } else {
-        console.log('Failed product Deleted (server)')
         res.status(404).send('Product not found');
     }
 });

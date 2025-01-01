@@ -18,7 +18,7 @@ const authenticateUser = (username, password) => {
 
 // פונקציה ליצירת טוקן JWT
 const generateAuthToken = (username) => {
-  const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
+  const token = jwt.sign({ username }, secretKey, { expiresIn: '12345h' });
   if (!token) {
     return res.status(403).send('נדרש טוקן');
   }
