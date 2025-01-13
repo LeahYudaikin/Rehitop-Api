@@ -97,7 +97,7 @@ app.post('/products/upload-image', (req, res) => {
     });
 });
 
-app.post('/products/delete-image', (req, res) => {
+app.post('/products/delete-image', authenticateToken, (req, res) => {
     let imagePath = req.body.imagePath.replace(`http://localhost:${port}/`, '');
     if (!imagePath) {
         return res.status(400).send('No image path provided');
@@ -115,7 +115,7 @@ app.post('/products/delete-image', (req, res) => {
     });
 });
 
-app.post('/products', (req, res) => {
+app.post('/products', authenticateToken, (req, res) => {
     const products = readProducts();
     console.log(req.body)
     const newProduct = req.body;
@@ -128,7 +128,7 @@ app.post('/products', (req, res) => {
     res.status(201).json(newProduct);
 });
 
-app.put('/products/:id', (req, res) => {
+app.put('/products/:id', authenticateToken, (req, res) => {
     const products = readProducts();
     console.log(typeof (products[0].Id))
     console.log(typeof (req.params.id))
@@ -146,7 +146,7 @@ app.put('/products/:id', (req, res) => {
     }
 });
 
-app.delete('/products/:id', (req, res) => {
+app.delete('/products/:id', authenticateToken, (req, res) => {
     const products = readProducts();
     const index = products.findIndex(p => p.Id === req.params.id);
     if (index !== -1) {

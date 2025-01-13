@@ -18,10 +18,12 @@
     "image": "assets/product-images/undefined/IMG_9253.JPG",
     "name": "Sectional Sofa",
     "categories": [
-      "חדרי שינה",
-      "ארונות",
-      "ארונות פתיחה",
-      "ארונות הזזה"
+      "חדרי ילדים",
+      "מיטות נוער",
+      "מכתביות",
+      "מזרונים",
+      "פולירון",
+      "ד\"ר שידרה"
     ],
     "price": 2500,
     "describe": "L-shaped sectional sofa with modern design.",
@@ -129,8 +131,11 @@
     "name": "Wooden Toy Closet",
     "categories": [
       "ארונות",
-      "OPENINGCLOSETS",
-      "SILDINGCLOSETS"
+      "פינות אוכל",
+      "שולחנות וכסאות לסלון",
+      "שולחנות וכסאות למטבח",
+      "כסאות מטבח",
+      "כסאות בר"
     ],
     "price": 900,
     "describe": "Toy closet designed for kids' room storage.",
