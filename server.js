@@ -74,11 +74,8 @@ app.get('/products/:id', (req, res) => {
 });
 
 app.post('/products/upload-image', (req, res) => {
-    const multer = require('multer');
-    console.log("req.body: "+req.body);
-    
-    const folderPath = `assets/product-images/${req.body.folder}`;
-    // const folderPath = `assets`;
+    const multer = require('multer');    
+    const folderPath = `assets/product-images/${req.query.folder}`;
     if (!fs.existsSync(folderPath)) {
         fs.mkdirSync(folderPath, { recursive: true });
     }

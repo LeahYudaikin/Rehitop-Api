@@ -1,22 +1,12 @@
 [
   {
-    "Id": "45",
-    "image": "assets/product-images/chair1.jpg",
-    "name": "Rocking Chair",
-    "categories": [
-      "כיסאות"
-    ],
-    "price": 220,
-    "describe": "Classic rocking chair for ultimate relaxation.",
-    "colors": "Wooden, White",
-    "company": "RockComfort"
-  },
-  {
     "Id": "46",
-    "image": "assets/product-images/closet1.png",
+    "image": "assets/product-images/undefined/IMG_9866.JPG",
     "name": "Storage Cabinet",
     "categories": [
-      "ארונות חדר ילדים"
+      "מזרונים",
+      "פולירון",
+      "ד\"ר שידרה"
     ],
     "price": 850,
     "describe": "Spacious storage cabinet with multiple sections.",
@@ -25,10 +15,13 @@
   },
   {
     "Id": "47",
-    "image": "assets/product-images/tbi/ASNAT.png",
+    "image": "assets/product-images/undefined/IMG_9253.JPG",
     "name": "Sectional Sofa",
     "categories": [
-      "ספות"
+      "חדרי שינה",
+      "ארונות",
+      "ארונות פתיחה",
+      "ארונות הזזה"
     ],
     "price": 2500,
     "describe": "L-shaped sectional sofa with modern design.",
@@ -37,10 +30,19 @@
   },
   {
     "Id": "48",
-    "image": "assets/product-images/tbi/BARKAT.png",
+    "image": "assets/product-images/undefined/IMG_9283.JPG",
     "name": "Foldable Bed",
     "categories": [
-      "מיטות"
+      "פינות אוכל",
+      "שולחנות וכסאות לסלון",
+      "שולחנות וכסאות למטבח",
+      "כסאות מטבח",
+      "כסאות בר",
+      "חדרי ילדים",
+      "מיטות נוער",
+      "מכתביות",
+      "סטנדרט",
+      "עיצוב אישי"
     ],
     "price": 900,
     "describe": "Space-saving foldable bed for easy storage.",
@@ -49,10 +51,14 @@
   },
   {
     "Id": "50",
-    "image": "assets/product-images/tbi/LESHEM.png",
+    "image": "assets/product-images/undefined/IMG_9407.JPG",
     "name": "Kids Closet",
     "categories": [
-      "ארונות חדר ילדים"
+      "פינות אוכל",
+      "שולחנות וכסאות לסלון",
+      "שולחנות וכסאות למטבח",
+      "כסאות מטבח",
+      "כסאות בר"
     ],
     "price": 780,
     "describe": "Children's closet with fun design and colors.",
@@ -64,7 +70,21 @@
     "image": "assets/product-images/chair1.jpg",
     "name": "Mesh Office Chair",
     "categories": [
-      "כיסאות"
+      "מזרונים",
+      "חדרי שינה",
+      "פולירון",
+      "ד\"ר שידרה",
+      "חדרי ילדים",
+      "מיטות נוער",
+      "מכתביות",
+      "סטנדרט",
+      "עיצוב אישי",
+      "ארונות",
+      "ארונות פתיחה",
+      "ארונות הזזה",
+      "משרדי",
+      "כסאות משרדיים",
+      "שולחנות משרדיים"
     ],
     "price": 230,
     "describe": "Mesh office chair for breathability and comfort.",
@@ -76,7 +96,10 @@
     "image": "assets/product-images/tbi/BARKAT.png",
     "name": "Wooden Platform Bed",
     "categories": [
-      "מיטות"
+      "מיטות",
+      "משרדי",
+      "כסאות משרדיים",
+      "שולחנות משרדיים"
     ],
     "price": 1500,
     "describe": "Platform bed made from high-quality wood.",
@@ -88,7 +111,12 @@
     "image": "assets/product-images/tbi/DAVID.png",
     "name": "Adjustable Office Chair",
     "categories": [
-      "כיסאות"
+      "מזרונים",
+      "פינות אוכל",
+      "שולחנות וכסאות לסלון",
+      "שולחנות וכסאות למטבח",
+      "כסאות מטבח",
+      "כסאות בר"
     ],
     "price": 270,
     "describe": "Ergonomic office chair with adjustable height.",
@@ -100,7 +128,9 @@
     "image": "assets/product-images/tbi/LESHEM.png",
     "name": "Wooden Toy Closet",
     "categories": [
-      "ארונות חדר ילדים"
+      "ארונות",
+      "OPENINGCLOSETS",
+      "SILDINGCLOSETS"
     ],
     "price": 900,
     "describe": "Toy closet designed for kids' room storage.",
@@ -112,7 +142,13 @@
     "image": "assets/product-images/chair1.jpg",
     "name": "Swivel Desk Chair",
     "categories": [
-      "כיסאות"
+      "חדרי שינה",
+      "ארונות",
+      "ארונות פתיחה",
+      "ארונות הזזה",
+      "משרדי",
+      "כסאות משרדיים",
+      "שולחנות משרדיים"
     ],
     "price": 200,
     "describe": "Desk chair with swivel and adjustable height.",
@@ -124,7 +160,11 @@
     "image": "assets/product-images/closet1.png",
     "name": "Wide Closet",
     "categories": [
-      "ארונות חדר ילדים"
+      "פינות אוכל",
+      "שולחנות וכסאות לסלון",
+      "שולחנות וכסאות למטבח",
+      "כסאות מטבח",
+      "כסאות בר"
     ],
     "price": 1050,
     "describe": "Wide closet with spacious compartments.",
@@ -304,7 +344,7 @@
     "image": "assets/product-images/tbi/LESHEM.png",
     "name": "Boys Closet",
     "categories": [
-      "ארונות חדר ילדים"
+      "מזרונים"
     ],
     "price": 950,
     "describe": "Functional closet designed for boys' rooms.",
@@ -364,7 +404,10 @@
     "image": "assets/product-images/tbi/DAVID.png",
     "name": "Mesh Office Chair",
     "categories": [
-      "כיסאות"
+      "פינות אוכל",
+      "שולחנות וכסאות לסלון",
+      "שולחנות וכסאות למטבח",
+      "כסאות בר"
     ],
     "price": 200,
     "describe": "Ergonomic office chair with mesh back.",
@@ -448,7 +491,7 @@
     "image": "assets/product-images/tbi/LESHEM.png",
     "name": "Girl's Wardrobe",
     "categories": [
-      "ארונות חדר ילדים"
+      "שולחנות וכסאות לסלון"
     ],
     "price": 950,
     "describe": "Wardrobe designed for girls' clothes.",
@@ -460,7 +503,11 @@
     "image": "assets/product-images/chair1.jpg",
     "name": "Dining Room Chair",
     "categories": [
-      "כיסאות"
+      "ריהוט סלוני",
+      "שולחנות וכסאות לסלון",
+      "ספריות קודש",
+      "ספות ומערכות ישיבה",
+      "שולחנות סלוניים ומזנונים"
     ],
     "price": 210,
     "describe": "Dining chair designed for comfort and style.",
@@ -472,7 +519,7 @@
     "image": "assets/product-images/closet1.png",
     "name": "Kids Storage Closet",
     "categories": [
-      "ארונות חדר ילדים"
+      "ריהוט סלוני"
     ],
     "price": 890,
     "describe": "Storage closet designed for kids' toys and clothes.",
@@ -496,7 +543,7 @@
     "image": "assets/product-images/tbi/BARKAT.png",
     "name": "Luxury Bed",
     "categories": [
-      "מיטות"
+      "ארונות פתיחה"
     ],
     "price": 2500,
     "describe": "Luxurious bed with soft mattress.",
@@ -592,7 +639,12 @@
     "image": "assets/product-images/tbi/LESHEM.png",
     "name": "Storage Wardrobe",
     "categories": [
-      "ארונות חדר ילדים"
+      "חדרי שינה",
+      "ריהוט סלוני",
+      "שולחנות וכסאות לסלון",
+      "ספריות קודש",
+      "ספות ומערכות ישיבה",
+      "שולחנות סלוניים ומזנונים"
     ],
     "price": 980,
     "describe": "Wardrobe with plenty of storage space.",
@@ -634,5 +686,90 @@
     "colors": "",
     "company": "",
     "Id": "efc34970-427e-4484-bb9a-9c7a49501cd7"
+  },
+  {
+    "name": "wertyui",
+    "image": "assets/product-images/undefined/IMG_9240.JPG",
+    "categories": [
+      "כיסאות"
+    ],
+    "price": 7522222,
+    "describe": "dfnm",
+    "colors": "",
+    "company": "",
+    "Id": "079307e3-baf6-49cb-91a4-504a28ef0f06"
+  },
+  {
+    "name": "kjhg",
+    "image": "assets/product-images/undefined/IMG_9240.JPG",
+    "categories": [
+      "שולחנות",
+      ""
+    ],
+    "price": 852,
+    "describe": "",
+    "colors": "",
+    "company": "",
+    "Id": "692d9fee-f208-4499-9e80-5622387f7070"
+  },
+  {
+    "name": "sara ",
+    "image": "assets/product-images/undefined/IMG_9261.JPG",
+    "categories": [
+      "כיסאות"
+    ],
+    "price": 852,
+    "describe": "852",
+    "colors": "",
+    "company": "",
+    "Id": "15709e86-46ac-4ff3-889a-f33c2fac130c"
+  },
+  {
+    "name": "xsz",
+    "image": "assets/product-images/SALON/logo.jpg",
+    "categories": [
+      "ריהוט סלוני",
+      "שולחנות וכסאות לסלון",
+      "ספריות קודש",
+      "ספות ומערכות ישיבה",
+      "שולחנות סלוניים ומזנונים"
+    ],
+    "price": 0,
+    "describe": "sxz",
+    "colors": "",
+    "company": "",
+    "Id": "f5f69030-62dc-4673-9738-176467877f2e"
+  },
+  {
+    "name": "bgvfc",
+    "image": "assets/product-images/SALON/Leonardo_Phoenix_09_Image_showcases_a_modern_minimalist_living_2.jpg",
+    "categories": [
+      "ריהוט סלוני",
+      "שולחנות וכסאות לסלון",
+      "ספריות קודש",
+      "ספות ומערכות ישיבה",
+      "שולחנות סלוניים ומזנונים"
+    ],
+    "price": 0,
+    "describe": "bgfv c",
+    "colors": "",
+    "company": "",
+    "Id": "aed8ebb8-3824-4857-9c68-1a3f809ffc44"
+  },
+  {
+    "name": "Corner Sofa",
+    "image": "assets/product-images/SALON/Leonardo_Phoenix_09_Image_showcases_a_modern_minimalist_living_2.jpg",
+    "categories": [
+      "ריהוט סלוני",
+      "שולחנות וכסאות לסלון",
+      "ספריות קודש",
+      "ספות ומערכות ישיבה",
+      "שולחנות סלוניים ומזנונים"
+    ],
+    "price": 0,
+    "describe": "bbbbbbbbbb",
+    "colors": "",
+    "company": "",
+    "Id": "ce0959e1-6313-47cc-92e6-2304a3027e82"
   }
 ]
