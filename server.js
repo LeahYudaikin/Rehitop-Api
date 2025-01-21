@@ -12,6 +12,8 @@ const app = express();
 const port = 3001;
 
 const productsFile = path.join(__dirname, 'assets/products.json');
+const idFile = path.join(__dirname, 'lastId.json');
+
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,10 +29,24 @@ const saveProducts = (products) => {
     fs.writeFileSync(productsFile, JSON.stringify(products, null, 2));
 };
 
-// {
-//     "username": "admin",
-//     "password": "admin123"
-// }
+const getNextId = () => {
+  let lastId = "A100";
+  if (fs.existsSync(idFile)) {
+    const data = fs.readFileSync(idFile);
+    lastId = JSON.parse(data).lastId;
+  }
+  let letter = lastId.charAt(0);
+  let number = parseInt(lastId.slice(1));
+  if (number < 999) {
+    number++;
+  } else {
+    letter = String.fromCharCode(letter.charCodeAt(0) + 1);
+    number = 100;
+  }
+  const newId = `${letter}${number}`;
+  fs.writeFileSync(idFile, JSON.stringify({lastId: newId}));
+  return newId;
+};
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
@@ -122,7 +138,7 @@ app.post('/products', authenticateToken, (req, res) => {
     if (newProduct.image.startsWith(`http://localhost:${port}/`)) {
         newProduct.image = newProduct.image.replace(`http://localhost:${port}/`, '');
     }
-    newProduct.Id = uuidv4();
+    newProduct.Id = getNextId();    
     products.push(newProduct);
     saveProducts(products);
     res.status(201).json(newProduct);
