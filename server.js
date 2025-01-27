@@ -1,9 +1,8 @@
+
 const cors = require('cors');
 const express = require('express');
 const fs = require('fs');
-const { console } = require('inspector');
 const path = require('path');
-const { v4: uuidv4 } = require('uuid');
 const bodyParser = require('body-parser');
 const { authenticateUser, generateAuthToken, authenticateToken } = require('./auth');
 require('dotenv').config();
@@ -11,14 +10,26 @@ require('dotenv').config();
 const app = express();
 const port = 3001;
 
-const productsFile = path.join(__dirname, 'assets/products.json');
-const idFile = path.join(__dirname, 'lastId.json');
+const angularDistPath = process.pkg
+    ? path.join(path.dirname(process.execPath), 'dist', 'r-system', 'browser')
+    : path.join(__dirname, 'dist', 'r-system', 'browser');
+
+const productsFile = process.pkg
+    ? path.join(path.dirname(process.execPath), 'assets', 'products.json')
+    : path.join(__dirname, 'assets', 'products.json');
+const idFile = process.pkg
+    ? path.join(path.dirname(process.execPath), 'assets', 'lastId.json')
+    : path.join(__dirname, 'assets', 'lastId.json');
+// הגדרת תיקיית Angular כסטטית
+app.use(express.static(angularDistPath));
+
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+const folderPath = path.join(process.cwd(), 'assets');
+app.use('/assets', express.static(folderPath));
 
 const readProducts = () => {
     const data = fs.readFileSync(productsFile);
@@ -71,7 +82,6 @@ const getNextId = () => {
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-
     if (authenticateUser(username, password)) {
         const token = generateAuthToken(username);
         res.json({ token });
@@ -100,7 +110,7 @@ app.get('/products', (req, res) => {
 
 
 app.get('/products/:id', (req, res) => {
-    console.log(req);
+    console.log("app.get('/products/:id', (req, res) => {");
     const products = readProducts();
     const product = products.find(p => p.Id == req.params.id);
     if (product) {
@@ -111,7 +121,7 @@ app.get('/products/:id', (req, res) => {
 });
 
 app.post('/products/upload-image', (req, res) => {
-    const multer = require('multer');    
+    const multer = require('multer');
     const folderPath = `assets/product-images/${req.query.folder}`;
     if (!fs.existsSync(folderPath)) {
         fs.mkdirSync(folderPath, { recursive: true });
@@ -124,6 +134,7 @@ app.post('/products/upload-image', (req, res) => {
             cb(null, file.originalname);
         }
     });
+
     const upload = multer({ storage }).single('image');
     upload(req, res, (err) => {
         if (err) {
@@ -153,13 +164,15 @@ app.post('/products/delete-image', authenticateToken, (req, res) => {
 });
 
 app.post('/products', authenticateToken, (req, res) => {
+    console.log('app.post(/products, authenticateToken, (req, res) => {')
     const products = readProducts();
-    console.log(req.body)
     const newProduct = req.body;
     if (newProduct.image.startsWith(`http://localhost:${port}/`)) {
         newProduct.image = newProduct.image.replace(`http://localhost:${port}/`, '');
     }
-    newProduct.Id = getNextId();    
+    newProduct.Id = getNextId();
+    if (!newProduct.name)
+        newProduct.name = newProduct.Id;
     products.push(newProduct);
     saveProducts(products);
     res.status(201).json(newProduct);
@@ -167,14 +180,14 @@ app.post('/products', authenticateToken, (req, res) => {
 
 app.put('/products/:id', authenticateToken, (req, res) => {
     const products = readProducts();
-    console.log(typeof (products[0].Id))
-    console.log(typeof (req.params.id))
     const index = products.findIndex(p => p.Id === req.params.id);
     if (index !== -1) {
         const updatedProduct = { ...products[index], ...req.body };
         if (updatedProduct.image.startsWith(`http://localhost:${port}/`)) {
             updatedProduct.image = updatedProduct.image.replace(`http://localhost:${port}/`, '');
         }
+        if (!updatedProduct.name)
+            updatedProduct.name = updatedProduct.Id;
         products[index] = updatedProduct;
         saveProducts(products);
         res.json(updatedProduct);
@@ -184,6 +197,7 @@ app.put('/products/:id', authenticateToken, (req, res) => {
 });
 
 app.delete('/products/:id', authenticateToken, (req, res) => {
+    console.log('app.delete(/products/:id, authenticateToken, (req, res) =>');
     const products = readProducts();
     const index = products.findIndex(p => p.Id === req.params.id);
     if (index !== -1) {
@@ -191,9 +205,17 @@ app.delete('/products/:id', authenticateToken, (req, res) => {
         saveProducts(products);
         res.status(204).send('sucssed');
     } else {
+        console.log(' res.status(404).send("Product not found");')
         res.status(404).send('Product not found');
     }
 });
+
+
+// הכוונת כל הבקשות הלא ידועות לקובץ index.html של Angular
+app.get('*', (req, res) => {
+    res.sendFile(path.join(angularDistPath, 'index.html'));
+});
+
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
