@@ -1,4 +1,3 @@
-
 const cors = require('cors');
 const express = require('express');
 const fs = require('fs');
@@ -167,6 +166,10 @@ app.post('/products', authenticateToken, (req, res) => {
     console.log('app.post(/products, authenticateToken, (req, res) => {')
     const products = readProducts();
     const newProduct = req.body;
+
+    if (!newProduct.image || !newProduct.categories) {
+        return res.status(400).send('Missing required fields');
+        }
     if (newProduct.image.startsWith(`http://localhost:${port}/`)) {
         newProduct.image = newProduct.image.replace(`http://localhost:${port}/`, '');
     }
@@ -181,8 +184,14 @@ app.post('/products', authenticateToken, (req, res) => {
 app.put('/products/:id', authenticateToken, (req, res) => {
     const products = readProducts();
     const index = products.findIndex(p => p.Id === req.params.id);
+
     if (index !== -1) {
         const updatedProduct = { ...products[index], ...req.body };
+
+        if (!updatedProduct.image || !updatedProduct.categories) {
+            return res.status(400).send('Missing required fields');
+            }
+
         if (updatedProduct.image.startsWith(`http://localhost:${port}/`)) {
             updatedProduct.image = updatedProduct.image.replace(`http://localhost:${port}/`, '');
         }
