@@ -30,6 +30,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const folderPath = path.join(process.cwd(), 'assets');
 app.use('/assets', express.static(folderPath));
 
+app.use((req, res, next) => {
+  res.setHeader("Content-Security-Policy", "default-src 'self' https://fonts.gstatic.com https://netfree.link");
+  next();
+});
+
 const readProducts = () => {
     const data = fs.readFileSync(productsFile);
     return JSON.parse(data);
@@ -87,6 +92,10 @@ app.post('/login', (req, res) => {
     } else {
         res.status(401).send('Invalid username or password');
     }
+});
+
+app.get('/', (req, res) => {
+  res.send('API is running');
 });
 
 app.get('/is-admin', authenticateToken, (req, res) => {
