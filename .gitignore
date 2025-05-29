@@ -9,8 +9,6 @@ myapp.exe
 node_modules/
 rehitop_setup.exe
 rehitopsetup.exe
-/assets
-/assets/.*
 
 
 *.exe
