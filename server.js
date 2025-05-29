@@ -237,9 +237,9 @@ app.delete('/products/:id', authenticateToken, (req, res) => {
 
 
 // הכוונת כל הבקשות הלא ידועות לקובץ index.html של Angular
-app.get('*', (req, res) => {
-    res.sendFile(path.join(angularDistPath, 'index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(angularDistPath, 'index.html'));
+// });
 
 
 app.listen(port, () => {
