@@ -31,7 +31,14 @@ const folderPath = path.join(process.cwd(), 'assets');
 app.use('/assets', express.static(folderPath));
 
 app.use((req, res, next) => {
-  res.setHeader("Content-Security-Policy", "default-src 'self' https://fonts.gstatic.com https://netfree.link");
+  res.setHeader("Content-Security-Policy", 
+    "default-src 'self'; " +
+    "img-src 'self' data: blob:; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "font-src 'self' https://fonts.gstatic.com; " +
+    "script-src 'self'; " +
+    "connect-src 'self' https://netfree.link;"
+  );
   next();
 });
 
