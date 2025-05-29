@@ -9,8 +9,19 @@ require('dotenv').config();
 const app = express();
 const port = 3001;
 
-const productsFile = path.join(__dirname, 'assets', 'products.json');
-const idFile = path.join(__dirname, 'assets', 'lastId.json');
+const angularDistPath = process.pkg
+    ? path.join(path.dirname(process.execPath), 'dist', 'r-system', 'browser')
+    : path.join(__dirname, 'dist', 'r-system', 'browser');
+
+const productsFile = process.pkg
+    ? path.join(path.dirname(process.execPath), 'assets', 'products.json')
+    : path.join(__dirname, 'assets', 'products.json');
+const idFile = process.pkg
+    ? path.join(path.dirname(process.execPath), 'assets', 'lastId.json')
+    : path.join(__dirname, 'assets', 'lastId.json');
+// הגדרת תיקיית Angular כסטטית
+app.use(express.static(angularDistPath));
+
 
 app.use(cors());
 app.use(express.json());
@@ -29,19 +40,22 @@ const saveProducts = (products) => {
 };
 
 const getNextId = () => {
-    const defaultLastId = "A100";
+    const defaultLastId = "A100"; // ערך ברירת מחדל ל-lastId
     let lastId = defaultLastId;
     let newId = "";
     try {
         if (fs.existsSync(idFile)) {
+            console.log('---if (fs.existsSync(idFile))');
             const data = fs.readFileSync(idFile, 'utf-8');
-            lastId = JSON.parse(data).lastId || defaultLastId;
+            lastId = JSON.parse(data).lastId || defaultLastId; // טיפול במקרה שהתוכן ריק
+            console.log(lastId);
         }
     } catch (error) {
         console.error("Error reading or parsing idFile:", error);
-        lastId = defaultLastId;
+        lastId = defaultLastId; // במקרה של שגיאה, השתמש בערך ברירת מחדל
     }
 
+    // חישוב ה-ID החדש
     let letter = lastId.charAt(0);
     let number = parseInt(lastId.slice(1), 10);
     if (number < 999) {
@@ -51,16 +65,19 @@ const getNextId = () => {
         number = 100;
     }
     newId = `${letter}${number}`;
+    console.log(newId);
 
+    // כתיבה לקובץ
     try {
         fs.writeFileSync(idFile, JSON.stringify({ lastId: newId }), 'utf-8');
     } catch (error) {
         console.error("Error writing to idFile:", error);
-        throw error;
+        throw error; // זורק שגיאה אם הכתיבה נכשלת
     }
 
     return newId;
 };
+
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
@@ -90,7 +107,9 @@ app.get('/products', (req, res) => {
     res.json(updatedProducts);
 });
 
+
 app.get('/products/:id', (req, res) => {
+    console.log("app.get('/products/:id', (req, res) => {");
     const products = readProducts();
     const product = products.find(p => p.Id == req.params.id);
     if (product) {
@@ -144,17 +163,16 @@ app.post('/products/delete-image', authenticateToken, (req, res) => {
 });
 
 app.post('/products', authenticateToken, (req, res) => {
+    console.log('app.post(/products, authenticateToken, (req, res) => {')
     const products = readProducts();
     const newProduct = req.body;
 
     if (!newProduct.image || !newProduct.categories) {
         return res.status(400).send('Missing required fields');
-    }
-
+        }
     if (newProduct.image.startsWith(`http://localhost:${port}/`)) {
         newProduct.image = newProduct.image.replace(`http://localhost:${port}/`, '');
     }
-
     newProduct.Id = getNextId();
     if (!newProduct.name)
         newProduct.name = newProduct.Id;
@@ -172,15 +190,13 @@ app.put('/products/:id', authenticateToken, (req, res) => {
 
         if (!updatedProduct.image || !updatedProduct.categories) {
             return res.status(400).send('Missing required fields');
-        }
+            }
 
         if (updatedProduct.image.startsWith(`http://localhost:${port}/`)) {
             updatedProduct.image = updatedProduct.image.replace(`http://localhost:${port}/`, '');
         }
-
         if (!updatedProduct.name)
             updatedProduct.name = updatedProduct.Id;
-
         products[index] = updatedProduct;
         saveProducts(products);
         res.json(updatedProduct);
@@ -190,6 +206,7 @@ app.put('/products/:id', authenticateToken, (req, res) => {
 });
 
 app.delete('/products/:id', authenticateToken, (req, res) => {
+    console.log('app.delete(/products/:id, authenticateToken, (req, res) =>');
     const products = readProducts();
     const index = products.findIndex(p => p.Id === req.params.id);
     if (index !== -1) {
@@ -197,9 +214,17 @@ app.delete('/products/:id', authenticateToken, (req, res) => {
         saveProducts(products);
         res.status(204).send('sucssed');
     } else {
+        console.log(' res.status(404).send("Product not found");')
         res.status(404).send('Product not found');
     }
 });
+
+
+// הכוונת כל הבקשות הלא ידועות לקובץ index.html של Angular
+app.get('*', (req, res) => {
+    res.sendFile(path.join(angularDistPath, 'index.html'));
+});
+
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
