@@ -8,7 +8,7 @@ const multer = require('multer');
 const { authenticateUser, generateAuthToken, authenticateToken } = require('./auth');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 // מסלולים תלויי build רגיל או pkg
 const angularDistPath = process.pkg
