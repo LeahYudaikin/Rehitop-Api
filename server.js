@@ -28,12 +28,12 @@ app.use('/assets', express.static(path.join(basePath, 'assets')));
 // CSP – אבטחה
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy",
-    "default-src 'self'; " +
-    "img-src 'self' data: blob:; " +
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-    "font-src 'self' https://fonts.gstatic.com; " +
-    "script-src 'self'; " +
-    "connect-src 'self' https://netfree.link;"
+  "default-src 'self'; " +
+  "img-src 'self' data: blob:; " +
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+  "font-src 'self' https://fonts.gstatic.com; " +
+  "script-src 'self'; " +
+  "connect-src 'self' https://netfree.link https://rehitop-client.onrender.com;"
   );
   next();
 });
